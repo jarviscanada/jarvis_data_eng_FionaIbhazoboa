@@ -1,0 +1,28 @@
+\c host_agent;
+
+CREATE TABLE IF NOT EXISTS PUBLIC.host_info (
+ id SERIAL PRIMARY KEY NOT NULL,
+ hostname VARCHAR UNIQUE NOT NULL,
+ CPU_number SMALLINT NOT NULL,
+ CPU_architecture VARCHAR NOT NULL,
+ CPU_model VARCHAR NOT NULL,
+ CPU_mhz VARCHAR NOT NULL,
+ L2_cache VARCHAR NOT NULL,
+ TOTAL_mem INT NOT NULL,
+ timestamp TIMESTAMP NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS PUBLIC.host_usage (
+ timestamp TIMESTAMP NOT NULL,
+ host_id SERIAL NOT NULL,
+ memory_free INT NOT NULL,
+ CPU_idle INT NOT NULL,
+ CPU_kernel INT NOT NULL,
+ disk_io INT NOT NULL,
+ disk_available VARCHAR NOT NULL,
+ FOREIGN KEY(host_id) 
+	REFERENCES host_info(id)
+);
+
+
