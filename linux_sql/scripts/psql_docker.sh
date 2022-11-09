@@ -23,7 +23,7 @@ case $cmd in
 	fi
 	docker volume create pgdata
 	export PGPASSWORD=$db_password
-	docker run --name jrvs_psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres:9.6-alpine
+	docker run --name jrvs_psql -e POSTGRES_USER=${db_user} -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres:9.6-alpine
 	exit $?
 	;;
 
